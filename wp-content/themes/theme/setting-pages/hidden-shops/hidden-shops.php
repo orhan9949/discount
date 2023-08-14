@@ -23,6 +23,7 @@ Class Hidden_shops {
                 $shop['term_id'] = $term_one->term_id;
                 $shop["count"]   = $term_one->count;
                 array_push($this->all_shops_array , $shop);
+                echo true;
             endif;
         endforeach;
         return $this->all_shops_array;
