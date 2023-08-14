@@ -1,0 +1,110 @@
+.categories {
+    display: grid;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    margin: 0 0 50px;
+    grid-gap: 15px;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+.category-card-shop a {
+    padding: 0;
+}
+.category-card-shop a {
+    display: block;
+    background: #f7f8fa;
+    border-radius: 10px;
+    padding: 30px 30px;
+    height: 100%;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.06);
+    /* margin-right: 10px; */
+}
+.category_shops__icon img {
+    width: 48px;
+    height: 48px;
+}
+
+.category_info {
+    width: 50%;
+}
+.category__name {
+    color: #262626;
+    margin: 10px 0;
+    font-weight: 600;
+    font-size: 20px;
+}
+.category__extra {
+    font-weight: 400;
+    font-size: 14px;
+}
+
+.category__icon {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+}
+.category__icon img {
+    width: 100%;
+}
+
+
+
+@media (max-width: 1200px) {
+    .categories {
+        display: grid;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        margin: 0 0 50px;
+        grid-gap: 15px;
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+    .category-card-shop a {
+        padding: 10px 10px;
+    }
+}
+@media (max-width: 992px) {
+    .categories {
+        flex-wrap: wrap;
+    }
+}
+@media (max-width: 767px) {
+    .categories {
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 10px;
+    }
+    .category-card-shop a {
+        padding: 12px;
+        align-items: start;
+        display: block;
+        height: 180px;
+    }
+    .category_info {
+        width: 61%;
+    }
+    .category__name {
+        font-size: 13px;
+        margin: 2px 0;
+    }
+    .category__extra {
+        font-size: 7px;
+    }
+    .category__icon {
+        width: 100%;
+        justify-content: flex-end;
+    }
+    .category__icon img {
+        width: 110px;
+    }
+    .category-card-shop a {
+        padding: 12px;
+        align-items: start;
+        display: block;
+        height: 120px;
+    }
+    .category__name {
+        font-size: 13px;
+        margin: 2px 0;
+    }
+    .category__extra {
+        font-size: 7px;
+    }
+}

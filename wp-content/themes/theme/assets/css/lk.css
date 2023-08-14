@@ -1,0 +1,598 @@
+/*.header__user {*/
+/*    width: 15%;*/
+/*    position: relative;*/
+/*}*/
+/*.header__user-menu {*/
+/*    display: none;*/
+/*    position: absolute;*/
+/*    top: 60px;*/
+/*    right: 0;*/
+/*    width: 300px;*/
+/*    z-index: 10;*/
+/*    background: #F4F4F4;*/
+/*    box-shadow: 3px 4px 30px rgba(55, 55, 55, 0.05);*/
+/*    border-radius: 10px;*/
+/*    overflow: hidden;*/
+/*}*/
+/*.header__user-menu li {*/
+/*    border-top: 1px solid #D4D4D4;*/
+/*}*/
+/*.header__user-menu li a {*/
+/*    display: block;*/
+/*    padding: 15px 30px;*/
+/*}*/
+/*.header__user-title {*/
+/*    border: 0 !important;*/
+/*    background: #04BFCE;*/
+/*    color: #fff;*/
+/*    padding: 15px 30px;*/
+/*    font-weight: 600;*/
+/*}*/
+/*.header__user-menu li a:hover svg * {*/
+/*    stroke: #04BFCE;*/
+/*}*/
+
+.header__user-exit a {
+    color: #737373;
+}
+.header__user-exit a svg * {
+    stroke: #737373;
+}
+.header__user-exit a:hover {
+    color: #04BFCE;
+}
+.header__user-exit a:hover svg * {
+    stroke: #04BFCE;
+}
+
+/*.header__user-title .account__pill-picture {*/
+/*    display: none;*/
+/*}*/
+/*.header__user-title .account__pill-name {*/
+/*    color: #fff;*/
+/*}*/
+/*.header__user-title .account__pill-email {*/
+/*    display: none;*/
+/*}*/
+/*.header__user-menu li a svg {*/
+/*    display: none;*/
+/*}*/
+.header__user-menu li.header__user-exit a svg {
+    display: inline-block;
+}
+
+.header__user-pill {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.header__user-picture {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 0 0 auto;
+    margin-right: 12px;
+}
+.header__user-picture img {
+    max-width: 100%;
+}
+.header__user-name a {
+    font-size: 16px;
+}
+.header__user-name a::after {
+    content: "";
+    background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAiIGhlaWdodD0iNiIgdmlld0JveD0iMCAwIDEwIDYiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Ik0xIDFMNSA1TDkgMSIgc3Ryb2tlPSIjMjYyNjI2IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4KPC9zdmc+Cg==");
+    display: inline-block;
+    margin-left: 9px;
+    width: 10px;
+    height: 6px;
+    vertical-align: middle;
+}
+
+.header__user-signup {
+    width: 100%;
+    text-align: center;
+}
+.header__user-signup a {
+    /* color: #7B30E6;
+    text-decoration: underline;
+    font-size: 16px; */
+    display: inline-block;
+    padding: 8px 32px;
+    background: #7B30E6;
+    border-radius: 8px;
+    border: 1px solid #7B30E6;
+    font-size: 16px;
+    color: #FFFFFF;
+    letter-spacing: 0.2px;
+    text-align: center;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.account {
+    display: flex;
+    justify-content: space-between;
+}
+.account__aside {
+    width: 22%;
+    flex: 0 0 auto;
+}
+.account__block {
+    background: #FAFAFA;
+    border-radius: 15px;
+    padding: 30px 0;
+}
+
+.account__pill {
+    display: flex;
+    align-items: center;
+    margin-bottom: 40px;
+    padding: 0 30px;
+}
+.account__pill-name {
+    font-size: 16px;
+    font-weight: 600;
+}
+.account__menu li a {
+    display: block;
+    padding: 10px 30px;
+    border-left: 1px solid transparent;
+    background: #F3F3F3;
+    margin: 15px 0;
+    border-radius: 10px;
+}
+.account__menu li.active a {
+    color: #FFFFFF;
+    background: #7b30e6;
+    /*border-left: 1px solid #04BFCE; */
+}
+.account__menu li.active a svg * {
+    stroke: #FFFFFF;
+}
+.account__menu li a span {
+    margin-right: 15px;
+}
+.account__menu li a:hover {
+    border-left: 1px solid #7b30e6;
+    color: #7b30e6;
+}
+.account__menu li a:hover svg * {
+    stroke: #7b30e6;
+}
+
+.account__content {
+    width: 75%;
+    padding: 0 0 0 15px;
+}
+
+.account__pill_big {
+    background: #FAFAFA;
+    border-radius: 15px;
+    padding: 30px 45px;
+    margin: 0 0 25px;
+}
+.account__pill-name_big {
+    font-size: 27px;
+}
+.account__pill-picture {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 0 0 auto;
+    margin-right: 12px;
+}
+.account__pill-picture img {
+    width: 100%;
+    max-height: 100%;
+}
+.account__pill-picture_big {
+    width: 140px;
+    height: 140px;
+    flex: 0 0 auto;
+    margin-right: 30px;
+}
+.account__pill-email {
+    display: block;
+    font-size: 17px;
+}
+.account__fields {
+    background: #FAFAFA;
+    border-radius: 15px;
+    padding: 50px 30px;
+}
+.account__remove {
+    margin-top: 50px;
+}
+.account__remove a {
+    text-decoration: underline;
+    color: #737373;
+    font-size: 16px;
+}
+.account__remove a:hover {
+    color: #04BFCE;
+}
+.account__fields .field {
+    width: 40%;
+}
+.account__regdate {
+    background: #FAFAFA;
+    border-radius: 15px;
+    text-align: center;
+    padding: 30px 0;
+    font-size: 16px;
+    margin-top: 25px;
+    color: #737373;
+}
+.account__regdate span {
+    font-size: 16px;
+    color: #404040;
+}
+
+.account__content_short {
+    padding-right: 0;
+}
+.product__author {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+.product__author .account__pill-picture {
+    width: 30px;
+    height: 30px;
+}
+.product__author .account__pill-name {
+    font-size: 16px;
+    font-weight: 500;
+}
+.flex_personal {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.field {
+    margin: 0 0 15px;
+}
+.field label {
+    color: #262626;
+    font-weight: 600;
+}
+.field_separate {
+    margin: 40px 0 20px;
+}
+.field.require label::after {
+    content: "*";
+    color: red;
+    margin: 0 0 0 5px;
+}
+.field small {
+    color: #525252;
+    font-size: 12px;
+    margin: 5px 0 0;
+    display: block;
+    font-weight: 400;
+}
+.field__drop {
+    display: flex;
+    justify-content: space-between;
+}
+.field__drop input {
+    width: 49%;
+}
+.field .btn {
+    width: 100%;
+    margin: 15px 0 5px;
+}
+.field small a {
+    font-size: 12px;
+    color: #262626;
+    font-weight: 400;
+}
+.field small a:hover {
+    color: #04BFCE;
+}
+.buttons .btn {
+    padding: 8px 60px;
+    margin-right: 15px;
+}
+.buttons {
+    margin-top: 20px;
+}
+.support_page_block {
+    display: flex;
+}
+.sup_title {
+    font-size: 20px;
+    font-weight: 800;
+    margin-top: 20px;
+}
+#supprt_list_elem {
+    width: 70%;
+    margin: 10px 0 0 0;
+    border-radius: 5px;
+    background: #F3F3F3;
+    padding: 10px;
+    overflow: hidden;
+    height: 40px;
+    transition: 0.2s linear;
+}
+#support_title {
+    font-weight: 700;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+.disc_list_elem {
+    color: #908d8d;
+}
+.aside_links_support {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: self-start;
+    width: 30%;
+    padding: 0 0 0 15px;
+}
+.footer_sup__menu {
+    width: 100%;
+    padding-right: 20px;
+}
+.footer_sup__title {
+    color: #000000;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    margin: 0 0 15px;
+}
+.footer_sup__menu ul li {
+    margin-bottom: 8px;
+}
+.footer_sup__menu ul li a {
+    font-size: 14px;
+    color: #000000;
+}
+.disc_list_elem {
+    color: #908d8d;
+}
+
+#support_title {
+    font-weight: 700;
+    font-size: 16px;
+    margin-bottom: 10px;
+
+}
+
+#supprt_list_elem {
+    width: 100%;
+    margin: 10px 0 0 0;
+    border-radius: 5px;
+    background: #F3F3F3;
+    padding: 10px;
+    overflow: hidden;
+    height: 40px;
+    transition: 0.2s linear;
+}
+
+
+#supprt_list_elem.open {
+    height: 96px;
+}
+
+#supprt_list_elem_2 {
+    width: 100%%;
+    margin: 10px 0 0 0;
+    border-radius: 5px;
+    background: #F3F3F3;
+    padding: 10px;
+    overflow: hidden;
+    height: 40px;
+    transition: 0.2s linear;
+}
+
+#supprt_list_elem_2.open {
+    height: 117px;
+}
+
+#supprt_list_elem_3 {
+    width: 100%%;
+    margin: 10px 0 0 0;
+    border-radius: 5px;
+    background: #F3F3F3;
+    padding: 10px;
+    overflow: hidden;
+    height: 40px;
+    transition: 0.2s linear;
+}
+
+#supprt_list_elem_3.open {
+    height: 96px;
+}
+
+#supprt_list_elem_4 {
+    width: 100%%;
+    margin: 10px 0 0 0;
+    border-radius: 5px;
+    background: #F3F3F3;
+    padding: 10px;
+    overflow: hidden;
+    height: 40px;
+    transition: 0.2s linear;
+}
+
+#supprt_list_elem_4.open {
+    height: 117px;
+}
+
+#supprt_list_elem_5 {
+    width: 100%%;
+    margin: 10px 0 0 0;
+    border-radius: 5px;
+    background: #F3F3F3;
+    padding: 10px;
+    overflow: hidden;
+    height: 40px;
+    transition: 0.2s linear;
+}
+
+#supprt_list_elem_5.open {
+    height: 117px;
+}
+
+#supprt_list_elem_6 {
+    width: 100%%;
+    margin: 10px 0 0 0;
+    border-radius: 5px;
+    background: #F3F3F3;
+    padding: 10px;
+    overflow: hidden;
+    height: 40px;
+    transition: 0.2s linear;
+}
+
+#supprt_list_elem_6.open {
+    height: 96px;
+}
+.account__content-left {
+    width: 70%;
+}
+
+
+@media (max-width: 1200px) {
+    .account__aside {
+        width: 30%;
+    }
+}
+@media (max-width: 992px) {
+    .account__aside {
+        width: 35%;
+        display: none;
+    }
+    .account__content {
+        width: 100%;
+    }
+    .product__card {
+        width: 100%;
+        margin: 0 0 15px 0;
+    }
+    .account__content_short {
+        padding-right: 0;
+    }
+    .account__content {
+        width: 100%;
+        padding: 0;
+    }
+    .account__pill-email {
+        display: block;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 767px) {
+    .account__aside {
+        display: none;
+    }
+    .account__pill {
+        background: none;
+        border-radius: unset;
+        padding: 0;
+        margin: 20px 0 30px;
+        flex-direction: column;
+    }
+    .account__pill-picture {
+        margin: 0 0 10px;
+        width: 90px;
+        height: 90px;
+    }
+    .account__pill-name {
+        text-align: center;
+        font-size: 24px;
+    }
+    .account__fields {
+        background: none;
+        border-radius: unset;
+        padding: 0;
+    }
+    .account__fields .field {
+        width: 100%;
+    }
+    .field input {
+        width: 100%;
+        font-size: 11px;
+        padding: 8px 16px;
+    }
+    .aside_links_support {
+        margin: 20px 0 0 0;
+        display: flex;
+        flex-wrap: nowrap;
+        display: none;
+    }
+    #support_list li {
+        width: 100%;
+    }
+    #supprt_list_elem {
+        width: 100%;
+    }
+
+    #supprt_list_elem.open {
+        height: 130px;
+    }
+
+    #supprt_list_elem_2 {
+        width: 100%;
+        height: 65px;
+    }
+
+    #supprt_list_elem_2.open {
+        height: 230px;
+    }
+
+    #supprt_list_elem_3 {
+        width: 100%;
+        height: 65px;
+    }
+
+    #supprt_list_elem_3.open {
+        height: 150px;
+    }
+
+    #supprt_list_elem_4 {
+        width: 100%;
+    }
+
+    #supprt_list_elem_4.open {
+        height: 225px;
+    }
+
+    #supprt_list_elem_5 {
+        width: 100%;
+    }
+
+    #supprt_list_elem_5.open {
+        height: 190px;
+    }
+
+    #supprt_list_elem_6 {
+        width: 100%;
+    }
+
+    #supprt_list_elem_6.open {
+        height: 145px;
+    }
+
+    #support_title {
+        margin-bottom: 20px;
+    }
+    .account__content-left {
+        width: 100%;
+    }
+}
