@@ -25,6 +25,8 @@ add_action( 'hidden_shops_event', 'hidden_shops_cronjob' );
 // Вызывает фцнкицю внутри
 function hidden_shops_cronjob() {
     require get_template_directory() .'/setting-pages/hidden-shops/hidden-shops.php';
+    global $hidden_shops_count;
+    new Hidden_shops($hidden_shops_count);
 }
 
 

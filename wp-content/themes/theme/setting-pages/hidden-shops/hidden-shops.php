@@ -3,17 +3,17 @@ Class Hidden_shops {
     public function __construct($total_count)
     {
         $this->total_count = $total_count;
-        $this->all_shops_array = ['хуяни2'];
+        $this->all_shops_array = [];
         $this->all_coupons_array = [];
-//        $this->get_all_coupons();
         $this->include();
-
     }
     public function include(){
+        $this->shops();
         $this->check_shops_from_jsonFile();
         $this->check_shops_from_database();
         $this->write_in_json();
     }
+
     /**
      * @return array
      * @method shops - Этот метод выводит все магазины у которых количество купонов меньше чем значение в свойстве $this->total_count
@@ -27,13 +27,29 @@ Class Hidden_shops {
             ]
         );
         foreach ($get_cat as $term_one):
-            if($term_one->count < $this->total_count):
+            if($term_one->count <= $this->total_count):
                 $shops_slugs = $term_one->slug;
                 array_push($this->all_shops_array , $shops_slugs);
             endif;
         endforeach;
         return $this->all_shops_array;
     }
+
+    /**
+     *
+     * @return void
+     * @method get_json_file - получаем json файл для дальнейшей обработки и сверки с массивом $this->all_shops_array(обновлённые магазины)
+     *
+     */
+    private function get_json_file(){
+        $object_json_link = file_get_contents(get_template_directory() .'/setting-pages/hidden-shops/object.json');
+        $object_json = json_decode($object_json_link, true);
+        if(empty($object_json)):
+            $object_json = ["never_no"];
+        endif;
+        return $object_json;
+    }
+
 
     /**
      * @return void
@@ -43,35 +59,33 @@ Class Hidden_shops {
      *
      */
     private function check_shops_from_jsonFile(){
-        $this->shops();
-        $object_json_link = file_get_contents(get_template_directory() .'/setting-pages/hidden-shops/object.json');
-        $object_json = json_decode($object_json_link, true);
-        foreach ($object_json as $all_i => $d){
+        $object_json = $this->get_json_file();
+        foreach ($object_json as $all_i => $d):
             if(!in_array($d, $this->all_shops_array)):
                 echo $all_i + 1 .') '.$d ;
-//                $args = array(
-//
-//                    'post_type'        => 'products',
-//                    'post_status'      => 'private',
-//                    'posts_per_page'   => 100,
-//                    'suppress_filters' => true, // подавление работы фильтров изменения SQL запроса
-//                    'tax_query' => array(
-//                        array(
-//                            array(
-//                                'taxonomy' => 'categories-shops',
-//                                'field' => 'slug',
-//                                'terms' => $d,
-//                            )
-//                        ),
-//                    ),
-//                );
-//                $my_posts = new WP_Query($args);
-//                foreach ($my_posts->posts as  $pos) {
-//                    global $wpdb;
-//                    $wpdb->get_results("UPDATE wp_posts SET post_status='publish' WHERE ID='".$pos->ID."'");
-//                }
+                $args = array(
+                    'post_type'        => 'products',
+                    'post_status'      => 'private',
+                    'posts_per_page'   => 100,
+                    'suppress_filters' => true, // подавление работы фильтров изменения SQL запроса
+                    'tax_query' => array(
+                        array(
+                            array(
+                                'taxonomy' => 'categories-shops',
+                                'field' => 'slug',
+                                'terms' => $d,
+                            )
+                        ),
+                    ),
+                );
+                $my_posts = new WP_Query($args);
+                foreach ($my_posts->posts as  $pos):
+                    global $wpdb;
+                    $wpdb->get_results("UPDATE wp_posts SET post_status='publish' WHERE ID='".$pos->ID."'");
+                endforeach;
             endif;
-        }
+        endforeach;
+
     }
 
     /**
@@ -82,33 +96,31 @@ Class Hidden_shops {
      *
      */
     private function check_shops_from_database(){
-        $this->shops();
-        $object_json_link = file_get_contents(get_template_directory() .'/setting-pages/hidden-shops/object.json');
-        $object_json = json_decode($object_json_link, true);
+        $object_json = $this->get_json_file();
         foreach ($this->all_shops_array as $all_i => $d2){
             if(!in_array($d2 , $object_json)):
                 echo $all_i + 1 .') ' .$d2 ;
-                //                $args = array(
-//
-//                    'post_type'        => 'products',
-//                    'post_status'      => 'publish',
-//                    'posts_per_page'   => 100,
-//                    'suppress_filters' => true, // подавление работы фильтров изменения SQL запроса
-//                    'tax_query' => array(
-//                        array(
-//                            array(
-//                                'taxonomy' => 'categories-shops',
-//                                'field' => 'slug',
-//                                'terms' => $d,
-//                            )
-//                        ),
-//                    ),
-//                );
-//                $my_posts = new WP_Query($args);
-//                foreach ($my_posts->posts as  $pos) {
-//                    global $wpdb;
-//                    $wpdb->get_results("UPDATE wp_posts SET post_status='private' WHERE ID='".$pos->ID."'");
-//                }
+                $args = array(
+                    'post_type'        => 'products',
+                    'post_status'      => 'publish',
+                    'posts_per_page'   => 100,
+                    'suppress_filters' => true, // подавление работы фильтров изменения SQL запроса
+                    'tax_query' => array(
+                        array(
+                            array(
+                                'taxonomy' => 'categories-shops',
+                                'field' => 'slug',
+                                'terms' => $d2,
+                            )
+                        ),
+                    ),
+                );
+                $my_posts = new WP_Query($args);
+                foreach ($my_posts->posts as  $pos) {
+                    global $wpdb;
+                    $wpdb->get_results("UPDATE wp_posts SET post_status='private' WHERE ID='".$pos->ID."'");
+                    echo $pos->ID.'<br>';
+                }
             endif;
         }
     }
@@ -119,40 +131,11 @@ Class Hidden_shops {
      * @method write_in_json - В этом методе идёт запись в object.json слагов магазинов у которых купонов меньше чем значение в свойстве $this->total_count
      */
     private function write_in_json(){
-        $array_shops = $this->shops();
+        $array_shops = $this->all_shops_array;
         $filename = get_template_directory() . '/setting-pages/hidden-shops/object.json';
         $data = json_encode($array_shops);
         file_put_contents($filename, $data);
     }
-//    private function get_all_coupons(){
-//        $array_shops = $this->shops();
-//        foreach($array_shops as $a_s){
-//            $args = array(
-//
-//                'post_type'        => 'products',
-//                'post_status'      => 'publish',
-//                'posts_per_page'   => 100,
-//                'suppress_filters' => true, // подавление работы фильтров изменения SQL запроса
-//                'tax_query' => array(
-//                    array(
-//                        array(
-//                            'taxonomy' => 'categories-shops',
-//                            'field' => 'slug',
-//                            'terms' => $a_s,
-//                        )
-//                    ),
-//                ),
-//            );
-//            $my_posts = new WP_Query($args);
-//            foreach ($my_posts->posts as  $pos) {
-//                array_push($this->all_coupons_array,$pos->ID);
-//            }
-//        }
-//       echo '<pre>';
-//       var_dump($this->all_coupons_array);
-//       echo '</pre>';
-//
-//
-//    }
 }
-$hidden_shops = new Hidden_shops(100);
+$hidden_shops_count = 100;
+

@@ -9,9 +9,10 @@ if( empty($saved) ) $saved = [];
     <div class="products__list">
         <?php
         $query = new WP_Query( [
-            'post_type' => 'products',
-            'orderby' => 'date',
-            'post__in' => array_keys($saved)
+            'post_type'   => 'products',
+            'post_status' => 'publish',
+            'orderby'     => 'date',
+            'post__in'    => array_keys($saved)
         ] );
         
         if ( $query->have_posts() ) {

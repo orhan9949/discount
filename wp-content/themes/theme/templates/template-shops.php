@@ -3,6 +3,11 @@
  * Template Name: Страница магазинов
  */
 get_header();
+
+require get_template_directory() .'/setting-pages/hidden-shops/hidden-shops.php';
+global $hidden_shops_count;
+
+
 ?>
 <main class="container" id="item_list_name" item_list_name="Stores">
     <section>
@@ -14,19 +19,24 @@ get_header();
         if( $terms && ! is_wp_error( $terms ) ):
         ?>
         <div class="categories">
-            <?php foreach( $terms as $term ): ?>
-            <div class="category-card-shop">
-                <a href="<?php echo get_term_link( $term->term_id ); ?>">
-                   <div class="category_shops__icon">
-                    <?php if( $image = get_field('icon', 'categories-shops_'.$term->term_id) ): ?>
-                        <img src="<?php echo $image['url']; ?>" alt="<?php echo esc_html( $term->name ); ?>">
-                    <?php endif; ?>
+            <?php
+            foreach( $terms as $term ):
+                if($term->count > $hidden_shops_count):
+                ?>
+                    <div class="category-card-shop">
+                        <a href="<?php echo get_term_link( $term->term_id ); ?>">
+                           <div class="category_shops__icon">
+                            <?php if( $image = get_field('icon', 'categories-shops_'.$term->term_id) ): ?>
+                                <img src="<?php echo $image['url']; ?>" alt="<?php echo esc_html( $term->name ); ?>">
+                            <?php endif; ?>
+                            </div>
+                            <h2 class="category__name"><?php echo esc_html( $term->name ); ?></h2>
+                            <div class="category__extra"><?php echo dc_cat_info($term->term_id); ?></div>
+                        </a>
                     </div>
-                    <h2 class="category__name"><?php echo esc_html( $term->name ); ?></h2>
-                    <div class="category__extra"><?php echo dc_cat_info($term->term_id); ?></div>
-                </a>
-            </div>
-            <?php endforeach; ?>
+                <?php
+                endif;
+            endforeach; ?>
         </div>
         <?php endif; ?>
 		

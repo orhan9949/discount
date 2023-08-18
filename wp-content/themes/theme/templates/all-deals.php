@@ -317,8 +317,35 @@ get_header();
 //require get_template_directory() .'/array-page/categories-shops/categories-shops.php';
 //       require get_template_directory() .'/array-page/categories/categories.php';
 
-//  require get_template_directory() .'/setting-pages/hidden-shops/hidden-shops.php';
-        ?>
+  require get_template_directory() .'/setting-pages/hidden-shops/hidden-shops.php';
+  global $hidden_shops_count;
+  new Hidden_shops($hidden_shops_count);
+
+
+//        $args = array(
+//
+//            'post_type'        => 'products',
+//            'post_status'      => 'publish',
+//            'posts_per_page'   => 100,
+//            'paged'            => 1,
+//            'suppress_filters' => true, // подавление работы фильтров изменения SQL запроса
+//            'orderby' => 'views_click',
+//            'order' => 'DESC',
+//            "s" =>  'TRebel Airdopes 141 Pro',
+//        );
+//        $my_posts = new WP_Query($args);
+//        var_dump($my_posts);
+//        echo '<pre>';
+//        var_dump($my_posts);
+//        echo '</pre>';
+
+
+
+
+//        global $wpdb;
+//        $num = 7915;
+//        $wpdb->get_results("UPDATE wp_posts SET post_status='private' WHERE ID='".$num."'");
+//        ?>
     </section>
 </main>
 <?php get_footer(); ?>
