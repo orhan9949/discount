@@ -358,8 +358,10 @@ section.home_cat_slider-section {
 
 .quare-code{
     position: relative;
-    background: #8F00FF;
+    background-size: cover;
+    background-repeat: no-repeat;
     width: 100%;
+    background-image: url("https://orhan-file.ru/riza/wp-content/themes/theme/images/block-quare-code/gradient.png");
 }
 /*.quare-code_block {*/
 /*    background: #8F00FF;*/
@@ -414,7 +416,7 @@ section.home_cat_slider-section {
 .quare-code__phone img {
     height: 400px;
     position: absolute;
-    top: -58px;
+    top: -80px;
 }
 .quare-code__phone {
     position: relative;
