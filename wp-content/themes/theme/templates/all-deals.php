@@ -317,9 +317,9 @@ get_header();
 //require get_template_directory() .'/array-page/categories-shops/categories-shops.php';
 //       require get_template_directory() .'/array-page/categories/categories.php';
 
-  require get_template_directory() .'/setting-pages/hidden-shops/hidden-shops.php';
-  global $hidden_shops_count;
-  new Hidden_shops($hidden_shops_count);
+//  require get_template_directory() .'/setting-pages/hidden-shops/hidden-shops.php';
+//  global $hidden_shops_count;
+//  new Hidden_shops($hidden_shops_count);
 
 
 //        $args = array(
@@ -345,7 +345,7 @@ get_header();
 //        global $wpdb;
 //        $num = 7915;
 //        $wpdb->get_results("UPDATE wp_posts SET post_status='private' WHERE ID='".$num."'");
-//        ?>
+// ?>
     </section>
 </main>
 <?php get_footer(); ?>

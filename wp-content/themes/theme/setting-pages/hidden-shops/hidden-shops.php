@@ -137,5 +137,5 @@ Class Hidden_shops {
         file_put_contents($filename, $data);
     }
 }
-$hidden_shops_count = 100;
+$hidden_shops_count = 0;
 
