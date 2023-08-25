@@ -100,25 +100,26 @@ $(document).ready(function(){
      * @param sortBy         Название по которой будет проходить сортировка (data,vievs_click,name)
      * @param sort           Передача сортировки(ASC, DESC)
      * @param cat            Передача таксономии(Categories, Categories-shops)
-     * @param tax_slug       Передача названия слага магазина товара или категории
+     * @param tax_slug       Передача названия slug магазина товара или категории
      * @param priceFrom      Передача цены от
      * @param priceTo        Передача цены до
      * @param discountFrom   Передача скидки от
      * @param discountTo     Передача скидки до
+     * @param cat_or_shop    Передача подкатегории или магазина
      *
      */
     let args = {
-        page: '' ,
+        page: 1 ,
         sortBy: '',
         sort: '',
-        cat: '',
-        tax_slug: '',
+        cat: $('.filter').attr('data-cat'),
+        tax_slug: $('.filter').attr('data-filter-cat'),
         priceFrom: '',
         priceTo: '',
-        discountFrom: '',
-        discountTo: '',
+        // discountFrom: '',
+        // discountTo: '',
+        cat_or_shop: ''
     };
-
     /**
      *
      * Функция для ajax запроса (получение данных и вывод на сайт)
@@ -132,12 +133,12 @@ $(document).ready(function(){
         if(args.sort === ''){
             args.sort = 'DESC';
         }
-        if(args.priceFrom === ''){
-            args.priceFrom = 1;
-        }
-        if(args.discountFrom === ''){
-            args.discountFrom = 1;
-        }
+        // if(args.priceFrom === ''){
+        //     args.priceFrom = 1;
+        // }
+        // if(args.discountFrom === ''){
+        //     args.discountFrom = 1;
+        // }
         if(args.priceTo === ''){
             args.priceTo = 100000000000;
         }
@@ -156,8 +157,9 @@ $(document).ready(function(){
                 'tax_slug':      args.tax_slug,
                 'priceFrom':     args.priceFrom,
                 'priceTo':       args.priceTo,
-                'discountFrom':  args.discountFrom,
-                'discountTo':    args.discountTo,
+                // 'discountFrom':  args.discountFrom,
+                // 'discountTo':    args.discountTo,
+                'cat_or_shop':   args.cat_or_shop
             },
             /**
              *
@@ -169,7 +171,7 @@ $(document).ready(function(){
                 console.log(data);
                 preloader();
                 console.log(Number(args.priceFrom) < Number(args.priceTo));
-                console.log(Number(args.discountFrom) < Number(args.discountTo));
+                // console.log(Number(args.discountFrom) < Number(args.discountTo));
 
                 /**
                  *
@@ -178,9 +180,11 @@ $(document).ready(function(){
                  * чтобы цена от была больше цены до так и по скидкам, если вдруг клиент наберёт в инпуте наоборот чтоб ничего не выводил
                  *
                  */
-                if(data !== null
-                    && Number(args.priceFrom) < Number(args.priceTo) && Number(args.discountFrom) < Number(args.discountTo)
-                ) {
+                // if(data !== null
+                //     && Number(args.priceFrom) < Number(args.priceTo) && Number(args.discountFrom) < Number(args.discountTo)
+                // ) {
+                if(data !== null && Number(args.priceFrom) < Number(args.priceTo))
+                {
                     data.forEach(i => {
                         $('.deals__content .products__list .product__card.deals-not-found').detach();
                         /**
@@ -306,15 +310,15 @@ $(document).ready(function(){
      * Данные из вильтров которые будут стоять по умолчанию
      *
      */
-    args.page          = 1;
-    args.sortBy        = "";
-    args.sort          = "";
-    args.cat           = $('.filter').attr('data-cat');
-    args.tax_slug      = $('.filter').attr('data-filter-cat');
-    args.priceFrom     = "";
-    args.priceTo       = "";
-    args.discountFrom  = "";
-    args.discountTo    = "";
+    // args.page          = 1;
+    // args.sortBy        = "";
+    // args.sort          = "";
+    // args.cat           = $('.filter').attr('data-cat');
+    // args.tax_slug      = $('.filter').attr('data-filter-cat');
+    // args.priceFrom     = "";
+    // args.priceTo       = "";
+    // args.discountFrom  = "";
+    // args.discountTo    = "";
 
     /**
      *
@@ -327,7 +331,7 @@ $(document).ready(function(){
 
     /**
      *
-     * Скрипт для работы скролла , чтоб выполнялась загрузка при скролле
+     * Скрипт для работы скролла, чтоб выполнялась загрузка при скролле
      *
      */
     let dealContentHeightTop = $('.deals__content .products__list').offset().top;
@@ -369,15 +373,15 @@ $(document).ready(function(){
     function total_ajax_scroll
     ( args ){
         args.page = 1;
-        $('.poroduct__list_all_deals').html('<div class="preloader"><img src="/wp-content/themes/theme/images/preloader.gif" alt=""></div> ');
+        $('.poroduct__list_all_deals').html('<div class="preloader"><img src="/riza/wp-content/themes/theme/images/preloader.gif" alt=""></div> ');
         ajax_scroll(args);
         dealContentHeight = $('.deals__content .products__list').height();
 
     }
 
 
-    $('.filter-sort__labels_items input').click(function(){
-        $('.filter-sort__labels_items input').parent().removeClass('active');
+    $('.filter-sort__labels_items#sortBy input').click(function(){
+        $('.filter-sort__labels_items#sortBy input').parent().removeClass('active');
         $('.filter-sort__name').parent().find('.filter-sort__sort .filter-sort__labels label').animate({
             opacity: 0
         },100,function(){
@@ -392,6 +396,26 @@ $(document).ready(function(){
         $(this).parent().addClass('active');
         args.sortBy = $(this).val();
         args.sort = $(this).attr('sort');
+        $('.poroduct__list_all_deals').html('');
+        total_ajax_scroll(args);
+
+    })
+
+    $('.filter-sort__labels_items#cat_or_shop input').click(function(){
+        $('.filter-sort__labels_items#cat_or_shop input').parent().removeClass('active');
+        $('.filter-sort__name').parent().find('.filter-sort__sort .filter-sort__labels label').animate({
+            opacity: 0
+        },100,function(){
+            setTimeout(() => {
+                $(this).parents('.filter-sort__sort').animate({
+                    height: 0
+                },100);
+            },200)
+        });
+        $('.filter-sort__name').parent().find('.filter-sort__sort').removeClass('active');
+        $('.filter-sort__name').parent().removeClass('active');
+        $(this).parent().addClass('active');
+        args.cat_or_shop = $(this).val();
         $('.poroduct__list_all_deals').html('');
         total_ajax_scroll(args);
 
@@ -413,8 +437,8 @@ $(document).ready(function(){
         $('.filter__discount_inputs-footer-btn').click(function(){
             args.priceFrom     = filter_price_discount__input.parent().find('#price-from').val();
             args.priceTo       = filter_price_discount__input.parent().find('#price-to').val();
-            args.discountFrom  = filter_price_discount__input.parent().find('#discount-from').val();
-            args.discountTo    = filter_price_discount__input.parent().find('#discount-to').val();
+            // args.discountFrom  = filter_price_discount__input.parent().find('#discount-from').val();
+            // args.discountTo    = filter_price_discount__input.parent().find('#discount-to').val();
             $('.poroduct__list_all_deals').html('');
             total_ajax_scroll(args);
             $(this).parents('.filter__discount_block').hide();
@@ -449,21 +473,21 @@ $(document).ready(function(){
         filter_price_discount__input.keyup(function() {
             args.priceFrom     = filter_price_discount__input.parent().find('#price-from').val();
             args.priceTo       = filter_price_discount__input.parent().find('#price-to').val();
-            args.discountFrom  = filter_price_discount__input.parent().find('#discount-from').val();
-            args.discountTo    = filter_price_discount__input.parent().find('#discount-to').val();
+            // args.discountFrom  = filter_price_discount__input.parent().find('#discount-from').val();
+            // args.discountTo    = filter_price_discount__input.parent().find('#discount-to').val();
             setTimeout(()=>{
                 if(
                     args.priceFrom     != priceFrom ||
-                    args.priceTo       != priceTo ||
-                    args.discountFrom  != discountFrom ||
-                    args.discountTo    != discountTo
+                    args.priceTo       != priceTo
+                    // args.discountFrom  != discountFrom ||
+                    // args.discountTo    != discountTo
                 ){
                     $('.poroduct__list_all_deals').html('');
                     total_ajax_scroll(args);
                     priceFrom = args.priceFrom;
                     priceTo = args.priceTo ;
-                    discountFrom = args.discountFrom;
-                    discountTo = args.discountTo;
+                    // discountFrom = args.discountFrom;
+                    // discountTo = args.discountTo;
                 }
             },1000)
         });
@@ -484,8 +508,9 @@ $(document).ready(function(){
         args.tax_slug      = $('.filter').attr('data-filter-cat');
         args.priceFrom     = "";
         args.priceTo       = "";
-        args.discountFrom  = "";
-        args.discountTo    = "";
+        // args.discountFrom  = "";
+        // args.discountTo    = "";
+        args.cat_or_shop   = "";
         $('.filter-price-discount .filter__discount_list input').val('');
         $('.poroduct__list_all_deals').html('');
         total_ajax_scroll(args);

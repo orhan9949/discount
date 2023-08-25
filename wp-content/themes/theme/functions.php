@@ -386,6 +386,9 @@ require get_template_directory() .'/api/api-other-deals-cupons.php';
 //Api для страницы магазинов и категорий (Это фильтры)
 require get_template_directory() .'/api/api-cat-filter.php';
 
+//Api для страницы магазинов и категорий (Это фильтры)
+require get_template_directory() .'/api/api-filter.php';
+
 
 add_filter('user_trailingslashit', 'no_page_slash', 70, 2);
 function no_page_slash( $string, $type ){

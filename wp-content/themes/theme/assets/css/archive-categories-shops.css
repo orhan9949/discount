@@ -517,7 +517,7 @@ form.filter-form {
 .filter__discount {
     display: flex;
     align-items: center;
-    padding: 0 0 0 40px;
+    padding: 0;
 }
 .poroduct__list_all_deals {
     position: relative;
@@ -591,6 +591,7 @@ input.filter-price-discount__input {
 }
 .filter-sort {
     position: relative;
+    margin-right: 30px;
 }
 .filter__price svg, .filter__discount svg,
 .filter__discount_inputs-footer,
@@ -621,16 +622,16 @@ input[type=number] {
         font-size: 14px;
     }
     .filter-sort__name {
-        max-width: 160px;
-        min-width: 160px;
+        max-width: 187px;
+        min-width: 187px;
         font-size: 14px;
     }
     .filter__price p, .filter__discount p {
         font-size: 18px;
     }
-    .filter__price, .filter__discount {
-        padding: 0 0 0 20px;
-    }
+    /*.filter__price, .filter__discount {*/
+    /*    padding: 0 0 0 20px;*/
+    /*}*/
     input.filter-price-discount__input {
         width: 120px;
     }
@@ -660,9 +661,7 @@ input[type=number] {
     .filter__price p, .filter__discount p {
         font-size: 14px;
     }
-    .filter__price, .filter__discount {
-        width: 50%;
-    }
+
     .filter-price-discount {
         width: 100%;
     }
@@ -755,6 +754,12 @@ input[type=number] {
     .filter__price_block, .filter__discount_block {
         display: none;
     }
+    .filter-sort {
+        margin-right: 10px;
+    }
+    .filter__price, .filter__discount {
+        width: 100%;
+    }
 }
 @media screen and (max-width: 567px) {
     form.filter-form {
@@ -783,6 +788,9 @@ input[type=number] {
     .filter__price p, .filter__discount p, .filter-sort__name {
         font-size: 12px;
         text-align: left;
+    }
+    .filter__price, .filter__discount {
+        width: 50%;
     }
 }
 /*------------------КОНЕЦ filter Daily Top-----------------*/

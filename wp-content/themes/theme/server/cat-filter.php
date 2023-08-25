@@ -18,8 +18,9 @@ Class Filter_Shop_Cat {
         $sort,
         $priceFrom,
         $priceTo,
-        $discountFrom,
-        $discountTo
+//        $discountFrom,
+//        $discountTo
+        $cat_or_shop
     )
     {
         $this->page            = $page;
@@ -29,8 +30,9 @@ Class Filter_Shop_Cat {
         $this->sort            = $sort;
         $this->priceFrom       = $priceFrom;
         $this->priceTo         = $priceTo;
-        $this->discountFrom    = $discountFrom;
-        $this->discountTo      = $discountTo;
+//        $this->discountFrom    = $discountFrom;
+//        $this->discountTo      = $discountTo;
+        $this->cat_or_shop     = $cat_or_shop;
         $this->result          = $this->filter_ajax();
     }
 
@@ -58,7 +60,32 @@ Class Filter_Shop_Cat {
 
             ));
         }
-        if($this->cat){
+        $cat_or_shop_Tax = 'categories';
+        if($this->cat == 'categories'):
+            $cat_or_shop_Tax = 'categories-shops';
+        endif;
+        if($this->cat && $this->cat_or_shop){
+            $args = array_merge($args , array(
+                'tax_query' => array(
+                    array(
+                        'relation' => 'AND',
+                        array(
+                            'taxonomy' => $this->cat,
+                            'field' => 'slug',
+                            'terms' => $this->tax_slug,
+                        ),
+                        array(
+                            'taxonomy' => $cat_or_shop_Tax,
+                            'field' => 'slug',
+                            'terms' => $this->cat_or_shop,
+                        ),
+                    ),
+                ),
+            ));
+
+        }
+
+        if($this->cat && $this->cat_or_shop == ''){
             $args = array_merge($args , array(
                 'tax_query' => array(
                     array(
@@ -70,24 +97,25 @@ Class Filter_Shop_Cat {
                     ),
                 ),
             ));
-
         }
-        if($this->priceFrom && $this->priceTo && $this->discountFrom && $this->discountTo){
+
+//        if($this->priceFrom && $this->priceTo && $this->discountFrom && $this->discountTo){
+        if($this->priceFrom && $this->priceTo){
             $args = array_merge($args , array(
                 'meta_query' => array(
-                    'relation' => 'AND', // OR/AND в зависимости от логики
+//                    'relation' => 'AND',
                     array(
-                        'key' => 'price', // сумма с НДС по которой ищем
-                        'value' => array($this->priceFrom, $this->priceTo), // значение в промежутке от-до
+                        'key' => 'price',
+                        'value' => array($this->priceFrom, $this->priceTo),
                         'type' => 'numeric',
                         'compare' => 'BETWEEN',
                     ),
-                    array(
-                        'key' => 'sale_size',
-                        'value' => array($this->discountFrom, $this->discountTo),
-                        'type' => 'numeric',
-                        'compare' => 'BETWEEN',
-                    ),
+//                    array(
+//                        'key' => 'sale_size',
+//                        'value' => array($this->discountFrom, $this->discountTo),
+//                        'type' => 'numeric',
+//                        'compare' => 'BETWEEN',
+//                    ),
                 ),
             ));
 
@@ -144,7 +172,9 @@ $obj = new Filter_Shop_Cat
     $_POST['sort'],
     $_POST['priceFrom'],
     $_POST['priceTo'],
-    $_POST['discountFrom'],
-    $_POST['discountTo']
+//    $_POST['discountFrom'],
+//    $_POST['discountTo']
+    $_POST['cat_or_shop']
+
 );
 echo $obj->result;

@@ -3,7 +3,6 @@ get_header();
 
 $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
 $term = get_queried_object();
-//var_dump($term);
 ?>
     <main class="container">
         <div class="aside__block_item" style="display: none;">
@@ -19,6 +18,7 @@ $term = get_queried_object();
                 <?php
                 $otherDeals = file_get_contents(get_template_directory() .'/array-page/categories-shops/jsons/'.get_queried_object()->slug.'.json');
                 $otherDeals_json = json_decode($otherDeals, true);
+
                 ?>
                 <div>
                     <img src="<?php echo $otherDeals_json['img_url']; ?>" >
@@ -32,16 +32,15 @@ $term = get_queried_object();
             </div>
             <div class="filter" data-cat="categories-shops" data-filter-cat="<?php echo $term->slug; ?>">
                 <form class="filter-form" action="">
-                    <div class="filter-sort">
+                    <div class="filter-sort" style="z-index: 20;">
                         <div class="filter-sort__name">Sort By
                             <svg width="24" height="23" viewBox="0 0 24 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M7 9.58333L12 14.375L17 9.58333" stroke="#4F5460" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
                             </svg>
                         </div>
-
                         <div class="filter-sort__sort">
                             <div class="filter-sort__labels">
-                                <div class="filter-sort__labels_items">
+                                <div class="filter-sort__labels_items" id="sortBy">
                                     <label>New deals
                                         <input type="radio" name="sortBy" value="date" sort="DESC">
                                     </label>
@@ -57,6 +56,26 @@ $term = get_queried_object();
                                     <label>Price (high - low)
                                         <input type="radio" name="sortBy" value="price" sort="DESC">
                                     </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="filter-sort" style="z-index: 10;">
+                        <div class="filter-sort__name">by Category
+                            <svg width="24" height="23" viewBox="0 0 24 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M7 9.58333L12 14.375L17 9.58333" stroke="#4F5460" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                            </svg>
+                        </div>
+                        <div class="filter-sort__sort">
+                            <div class="filter-sort__labels">
+                                <div class="filter-sort__labels_items" id="cat_or_shop">
+                                    <?php
+                                    require get_template_directory(). '/components/filter-for-undercat-and-shop.php';
+                                    $request = [];
+                                    $request['category'] = 'categories';
+                                    $request['pageslug'] = $term->slug;
+                                    filter_for_undercat_and_shop($request);
+                                    ?>
                                 </div>
                             </div>
                         </div>
@@ -91,35 +110,35 @@ $term = get_queried_object();
                                 </div>
                             </div>
                         </div>
-                        <div class="filter__discount">
-                            <div class="filter__discount_name">
-                                <p>Discount</p>
-                                <svg width="24" height="23" viewBox="0 0 24 23" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M7 9.58333L12 14.375L17 9.58333" stroke="#4F5460" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                                </svg>
-                            </div>
-                            <div class="filter__discount_block">
-                                <div class="filter__discount_list">
-                                    <div class="filter__discount_inputs-header">
-                                        <div class="filter__discount_block-exit">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="14" viewBox="0 0 13 14" fill="none">
-                                                <path d="M1 13L12.3391 1" stroke="#313131" stroke-linecap="round" stroke-linejoin="round"/>
-                                                <path d="M12.3391 13L1 1" stroke="#313131" stroke-linecap="round" stroke-linejoin="round"/>
-                                            </svg>
-                                        </div>
-                                        <p>Discount</p>
-                                        <div class="filter__submit">Clear all</div>
-                                    </div>
-                                    <div class="filter__discount_inputs">
-                                        <input type="number" class="filter-price-discount__input" id="discount-from" placeholder="From, %">
-                                        <input type="number" class="filter-price-discount__input" id="discount-to" placeholder="To, %">
-                                    </div>
-                                    <div class="filter__discount_inputs-footer">
-                                        <div class="filter__discount_inputs-footer-btn">Apply</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+<!--                        <div class="filter__discount">-->
+<!--                            <div class="filter__discount_name">-->
+<!--                                <p>Discount</p>-->
+<!--                                <svg width="24" height="23" viewBox="0 0 24 23" fill="none" xmlns="http://www.w3.org/2000/svg">-->
+<!--                                    <path d="M7 9.58333L12 14.375L17 9.58333" stroke="#4F5460" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>-->
+<!--                                </svg>-->
+<!--                            </div>-->
+<!--                            <div class="filter__discount_block">-->
+<!--                                <div class="filter__discount_list">-->
+<!--                                    <div class="filter__discount_inputs-header">-->
+<!--                                        <div class="filter__discount_block-exit">-->
+<!--                                            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="14" viewBox="0 0 13 14" fill="none">-->
+<!--                                                <path d="M1 13L12.3391 1" stroke="#313131" stroke-linecap="round" stroke-linejoin="round"/>-->
+<!--                                                <path d="M12.3391 13L1 1" stroke="#313131" stroke-linecap="round" stroke-linejoin="round"/>-->
+<!--                                            </svg>-->
+<!--                                        </div>-->
+<!--                                        <p>Discount</p>-->
+<!--                                        <div class="filter__submit">Clear all</div>-->
+<!--                                    </div>-->
+<!--                                    <div class="filter__discount_inputs">-->
+<!--                                        <input type="number" class="filter-price-discount__input" id="discount-from" placeholder="From, %">-->
+<!--                                        <input type="number" class="filter-price-discount__input" id="discount-to" placeholder="To, %">-->
+<!--                                    </div>-->
+<!--                                    <div class="filter__discount_inputs-footer">-->
+<!--                                        <div class="filter__discount_inputs-footer-btn">Apply</div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
                         <div class="filter__submit">Clear all</div>
                     </div>
                 </form>
