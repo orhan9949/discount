@@ -68,6 +68,7 @@ $(document).ready(function(){
         );
     },100)
 
+
     $(".products-4x").slick({
         infinite: true,
         slidesToScroll: 1,
@@ -101,7 +102,6 @@ $(document).ready(function(){
     });
     var width = $(window).width();
     if( width < 992 ) {
-
         $(".aside__items").slick({
             infinite: true,
             slidesToShow: 2,
